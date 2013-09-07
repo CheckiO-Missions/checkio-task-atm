@@ -1,17 +1,15 @@
-/*Please dont change it */
-
 /*Common*/
-
 .animation_results,
 .animation_results .x-panel-body{
-    background-color: #dfe8f7;
+    background-color: #d4d4d4;
 }
 
 .tryit_results,
 .tryit_results .x-panel-body{
-    background-color: #dfe8f7;
+    background-color: #d4d4d4;
     overflow: auto;
 }
+
 
 .animation-success {
     background: linear-gradient(to bottom, #ffac54 0%,#ff8d2c 100%);
@@ -30,17 +28,16 @@
     display:table;
 }
 
+
 /* Animation */
 .animation-content{
-    background-color: #dfe8f7;
+    background-color: #d4d4d4;
     color: #696969;
     font-family: verdana;
     font-size: 15px;
 }
 
-.animation-content .call,
-.animation-content .answer,
-.animation-content .output{
+.animation-content .call, .animation-content .answer, .animation-content .output{
     font-weight: bold;
     padding: 10px;
     border: 2px dotted #a9a9a9;
@@ -48,8 +45,14 @@
     color: black;
     text-align: center;
     letter-spacing: 0.7px;
+
     word-break: break-word;
-    white-space: pre;
+}
+
+.animation-content h1 {
+    color: black;
+    font-size: 30px;
+    padding: 10px;
 }
 
 .animation-content .error{
@@ -57,106 +60,92 @@
     border-color: #de0202;
 }
 
-.tryit-content {
-    background-color: #dfe8f7;
-    font-family: verdana;
+.animation-content .exp-table {
+    color: #294270;
+    border-collapse: collapse;
+    width: 380px;
 }
 
-.tryit-content .tool td{
+.animation-content .exp-table tr {
+    border-bottom: solid #898A8A 2px;
+}
+
+.animation-content .exp-table tr:last-child {
+    border-bottom: none;
+}
+
+.animation-content .exp-table td {
     text-align: center;
-    vertical-align: top;
+    border-right: solid #898A8A 2px;
     padding: 3px;
 }
 
-/*it for firefox*/
-.tryit-content .tool tr:first-child td:last-child {
-    height: 20%;
+.animation-content .exp-table td:last-child {
+    border-right: none;
 }
 
-.tryit-content .checkio-result{
-    font-size: 16px;
-    text-align: center;
-    color: #294270;
-    width: 160px;
+.tryit_results .x-panel-body{
+    background-color: #d4d4d4;
 }
 
-.tryit-content .btn {
-    padding: 4px 6px;
-    font-size: 14px;
-    font-family: Verdana;
-    font-weight: 500;
-    line-height: 1.428571429;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
+.tryit_results .tool{
+    margin: 20px;
+}
+
+.tryit_results .tool .withdraw{
+    padding-top: 29px;
+    width: 143px;
+    height: 63px;
+    background: url(/media/files/tryit/atm/withdraw_panel.png) no-repeat;
+    color: #e4e4e9;
+    font-weight: bold;
+    float: left;
+}
+
+
+
+.tryit_results .tool .withdraw label.current_balance{
+    float: left;
+    margin-left: 22px;
+    width: 46px;
+}
+
+.tryit_results .tool .withdraw input.withdraw_sum{
+    float: left;
+    margin-left: 23px;
+    width: 46px;
+    background: transparent;
+    border: none;
+    color: #e4e4e9;
+}
+
+.tryit_results .tool .bn_withdraw{
+    float: left;
+    width: 100px;
+    height: 33px;
+    background: url(/media/files/tryit/atm/withdraw_button.png) no-repeat;
+    border: none;
     cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: #8FC7ED;
+    margin-top: 18px;
+    margin-left: 5px;
 }
 
-.tryit-content .btn:focus {
-    outline: thin dotted #333;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
+.tryit_results .tool .bn_withdraw:hover{
+    background-position: 0 -34px;
 }
 
-.tryit-content .btn:hover,
-.tryit-content .btn:focus {
-    text-decoration: none;
-    background-color: #65A1CF;
+.tryit_results .tool .bn_withdraw:active{
+    background-position: 0 -68px;
 }
 
-.tryit-content .btn:active,
-.tryit-content .btn.active {
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+.tryit_results .table{
+    min-height: 70px;
 }
 
-.tryit-content .btn.disabled,
-.tryit-content .btn[disabled],
-fieldset[disabled] .btn {
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.65;
-    filter: alpha(opacity=65);
-    -webkit-box-shadow: none;
-    box-shadow: none;
+.tryit_results .bn_reset{
+    float: left;
+    height: 17px;
+    width: 61px;
+    background: url(/media/files/tryit/atm/reset_button.png) no-repeat;
+    margin-left: 6px;
 }
-
-.tryit-content input[type="text"],
-.tryit-content input[type="number"]
-{
-    display: inline-block;
-    padding: 4px 6px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    font-family: inherit;
-    color: #294270;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-}
-
-.tryit-content input[type="text"]:focus,
-.tryit-content input[type="number"]:focus{
-    border-color: rgba(82, 168, 236, 0.8);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-}
-
-.tryit-content input[type="text"][disabled],
-.tryit-content input[type="number"][readonly]{
-    cursor: not-allowed;
-    background-color: #eeeeee;
-}
-
-/* Your CSS */
-/*          */

@@ -1,10 +1,10 @@
-//Dont change it
-requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
+requirejs(['ext_editor_1', 'jquery_190', 'components/table_1'],
     function (ext, $, TableComponent) {
 
         var cur_slide = {};
 
         ext.set_start_game(function (this_e) {
+//            this_e.setAnimationHeight(800);
         });
 
         ext.set_process_in(function (this_e, data) {
@@ -29,7 +29,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         ext.set_animate_success_slide(function (this_e, options) {
             var $h = $(this_e.setHtmlSlide('<div class="animation-success"><div></div></div>'));
-            this_e.setAnimationHeight(85);
+            this_e.setAnimationHeight(88);
         });
 
         ext.set_animate_slide(function (this_e, data, options) {
@@ -39,7 +39,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 return false;
             }
             if (data.error) {
-                $content.find('.call').html('Fail: checkio(' + ext.JSON.encode(data.in) + ')');
+                $content.find('.call').html('Fail: checkio(' + ext.JSON.encode(data.referee) + ')');
                 $content.find('.output').html(data.error.replace(/\n/g, ","));
 
                 $content.find('.output').addClass('error');
@@ -49,21 +49,20 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 this_e.setAnimationHeight($content.height() + 60);
                 return false;
             }
-
             var checkioInput = data.in;
             var rightResult = data.ext["answer"];
             var userResult = data.out;
-            var result = data.ext["result"];
-            var result_addon = data.ext["result_addon"];
 
 
             //if you need additional info from tests (if exists)
             var explanation = data.ext["explanation"];
 
+            $content.find('.call .call-checkio').html('checkio(' + ext.JSON.encode(checkioInput) + ')');
             $content.find('.output').html('&nbsp;Your result:&nbsp;' + ext.JSON.encode(userResult));
 
-            if (!result) {
-                $content.find('.call').html('Fail: checkio(' + ext.JSON.encode(checkioInput) + ')');
+            //String conversion for array compare
+            if (String(rightResult) != String(userResult)) {
+                $content.find('.call .call-result').html('Fail: checkio(' + ext.JSON.encode(checkioInput) + ')');
                 $content.find('.answer').html('Right result:&nbsp;' + ext.JSON.encode(rightResult));
                 $content.find('.answer').addClass('error');
                 $content.find('.output').addClass('error');
@@ -73,44 +72,70 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 $content.find('.call').html('Pass: checkio(' + ext.JSON.encode(checkioInput) + ')');
                 $content.find('.answer').remove();
             }
-            //Dont change the code before it
 
-            //Your code here about test explanation animation
-            //$content.find(".explanation").html("Something text for example");
-            //
-            //
-            //
-            //
-            //
+            var $table = $content.find('.explanation .exp-table');
+            for (var i = 0; i < explanation.length; i++) {
+                var $tr = $("<tr>");
+                $tr.append($("<td>").html(explanation[i][0]));
+                $tr.append($("<td>").html(explanation[i][1]));
+                $tr.append($("<td>").html(explanation[i][2]));
+                $tr.append($("<td>").html(explanation[i][3]));
+                $table.append($tr);
+            }
 
-
-            this_e.setAnimationHeight($content.height() + 60);
+            this_e.setAnimationHeight($content.height() + 50);
 
         });
 
-       
+        //TRYIT
+        var images_folder = '/media/files/tryit/atm/';
+        var current_balance = 120;
+        var history = [];
+        var $el;
+        var el_table;
 
-        var colorOrange4 = "#F0801A";
-        var colorOrange3 = "#FA8F00";
-        var colorOrange2 = "#FAA600";
-        var colorOrange1 = "#FABA00";
+        function isNumber(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
 
-        var colorBlue4 = "#294270";
-        var colorBlue3 = "#006CA9";
-        var colorBlue2 = "#65A1CF";
-        var colorBlue1 = "#8FC7ED";
+        ext.set_reset_form_data(function(this_e, el){
+            var $el = $(el);
+            $el.find('.bn_reset').click()
+        });
 
-        var colorGrey4 = "#737370";
-        var colorGrey3 = "#D9E9E";
-        var colorGrey2 = "#C5C6C6";
-        var colorGrey1 = "#EBEDED";
+        ext.set_console_process_ret(function (this_e, ret) {
+            $el.find('.current_balance').html(ret);
+        });
 
-        var colorWhite = "#FFFFFF";
-        //Your Additional functions or objects inside scope
-        //
-        //
-        //
+        ext.set_generate_animation_panel(function (this_e) {
 
+            $el = $(this_e.setHtmlTryIt(ext.get_template('tryit')));
+            el_table = new TableComponent({
+                jq_table: $el.find('.table'),
+                progressive_length: 5,
+                default_add_row_append: false
+            });
+            $el.find('.withdraw_sum').focus();
+
+            $el.find('.current_balance').text(current_balance);
+
+            $el.find('.bn_reset').click(function(){
+                current_balance = 120;
+                history = [];
+                $el.find('.current_balance').html(current_balance);
+                $el.find('.table .cell').remove();
+            });
+
+            $el.find('form').submit(function(e){
+                var withdraw_sum = parseInt($el.find('.withdraw_sum').val(), 10);
+                history.push(withdraw_sum);
+                this_e.sendToConsoleCheckiO([current_balance,history]);
+                el_table.add_row([$el.find('.current_balance').text(), withdraw_sum])
+                e.stopPropagation();
+                return false;
+            });
+
+        });
 
     }
 );
