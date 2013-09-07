@@ -7,30 +7,57 @@ Each test is dict with
     "explanation" -- not necessary key, it's using for additional info in animation.
 """
 
-
 TESTS = {
     "Basics": [
         {
-            "input": [3, 2],
-            "answer": 5,
-            "explanation": "3+2=?"
+            "input": [120, [10, 20, 30]],
+            "answer": 57,
+            "explanation": [
+                [120, 10, 1, 109],
+                [109, 20, 1, 88],
+                [88, 30, 1, 57],
+                [57, "", "", ""]
+            ]
         },
         {
-            "input": [5, 7],
-            "answer": 12,
-            "explanation": "5+7=?"
-        }
-    ],
-    "Extra": [
+            "input": [120, [200, 10]],
+            "answer": 109,
+            "explanation": [
+                [120, 200, "", "not enough money"],
+                [120, 10, 1, 109],
+                [109, "", "", ""]
+            ]
+        },
         {
-            "input": [6, 3],
+            "input": [100, [90, 3]],
             "answer": 9,
-            "explanation": "6+3=?"
+            "explanation": [
+                [100, 90, 1, 9],
+                [9, 3, "", "withdrawal must be divisible by 5"],
+                [9, "", "", ""]
+            ]
         },
         {
-            "input": [6, 7],
-            "answer": 13,
-            "explanation": "6+7=?"
+            "input": [100, [100, -10]],
+            "answer": 100,
+            "explanation": [
+                [100, 100, "", "not enough money to cover banks commission"],
+                [100, -10, "", "withdrawal must be positive"],
+                [100, "", "", ""]
+            ]
+        },
+        {
+            "input": [100, [20, 20, 20, 20, 15]],
+            "answer": 0,
+            "explanation": [
+                [100, 20, 1, 79],
+                [79, 20, 1, 58],
+                [58, 20, 1, 37],
+                [37, 20, 1, 16],
+                [16, 15, 1, 0],
+                [0, "", "", ""]
+            ]
         }
+
     ]
 }
