@@ -57,19 +57,21 @@ requirejs(['ext_editor_1', 'jquery_190', 'components/table_1'],
             //if you need additional info from tests (if exists)
             var explanation = data.ext["explanation"];
 
-            $content.find('.call .call-checkio').html('checkio(' + ext.JSON.encode(checkioInput) + ')');
+//            $content.find('.call .call-checkio').html('checkio(' + ext.JSON.encode(checkioInput) + ')');
             $content.find('.output').html('&nbsp;Your result:&nbsp;' + ext.JSON.encode(userResult));
 
             //String conversion for array compare
             if (String(rightResult) != String(userResult)) {
-                $content.find('.call .call-result').html('Fail: checkio(' + ext.JSON.encode(checkioInput) + ')');
+                $content.find('.call .call-result').html('Fail: checkio(' + ext.JSON.encode(checkioInput)[0] + "," +
+                    ext.JSON.encode(checkioInput)[1] + ')');
                 $content.find('.answer').html('Right result:&nbsp;' + ext.JSON.encode(rightResult));
                 $content.find('.answer').addClass('error');
                 $content.find('.output').addClass('error');
                 $content.find('.call').addClass('error');
             }
             else {
-                $content.find('.call').html('Pass: checkio(' + ext.JSON.encode(checkioInput) + ')');
+                $content.find('.call').html('Pass: checkio(' + ext.JSON.encode(checkioInput)[0] + "," +
+                    ext.JSON.encode(checkioInput)[1] + ')');
                 $content.find('.answer').remove();
             }
 
