@@ -130,7 +130,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'components/table_1'],
             $el.find('form').submit(function(e){
                 var withdraw_sum = parseInt($el.find('.withdraw_sum').val(), 10);
                 history.push(withdraw_sum);
-                this_e.sendToConsoleCheckiO([current_balance,history]);
+                this_e.sendToConsoleCheckiO(current_balance,history);
                 el_table.add_row([$el.find('.current_balance').text(), withdraw_sum])
                 e.stopPropagation();
                 return false;
